@@ -1,0 +1,119 @@
+{\rtf1\ansi\deff0
+{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fmodern\fcharset0 Courier New;}}
+{\colortbl;\red0\green0\blue0;\red51\green51\blue51;\red180\green0\blue0;}
+\viewkind4\uc1\pard\sb120\sa120\qc\lang1036
+
+{\b\fs32 GENERAL DIGITAL VOICING PROGRAM (GDVP)\par}
+{\b\fs26 UNIFIED MASTER PROPRIETARY LICENSE Agreement\par}
+\pard\sb60\sa60\ql
+
+{\b Effective Date:} September 25, 2026\par
+{\b Author & Sole Licensor:} M. Fran\u231?ois-Xavier Briollais (hereinafter, "The Licensor")\par
+
+\pard\sb120\sa60\ql{\b\fs24 PREAMBLE\par}
+\pard\sb60\sa60\ql\f0\fs20
+This Unified Master Proprietary License ("The Agreement") governs the worldwide use,
+distribution, and integration of the General Digital Voicing Program (GDVP) architecture,
+its C11 source code, DSP graph compiler, VST3 binaries, and all associated MIL-STD-498
+documentation (collectively, "The Software"). This Agreement establishes distinct
+operational tiers: B2C (Consumer), B2B (Enterprise), and Defense/Military.\par
+By installing, executing, or integrating The Software, the Licensee (whether an
+individual, corporation, or state actor) unconditionally accepts the terms of this
+Agreement.\par
+
+\pard\sb120\sa60\ql{\b\fs24 ARTICLE 1. OWNERSHIP AND INTELLECTUAL PROPERTY\par}
+\pard\sb60\sa60\ql\fs20
+{\b 1.1 Absolute Ownership:} The Software, including all algorithms, MISRA C 2012
+implementations, AST Differential Compilers, and associated schematics, are the
+exclusive, undivided intellectual property of M. Fran\u231?ois-Xavier Briollais.\par
+{\b 1.2 No Transfer of Rights:} This Agreement grants a limited, conditional license to
+use The Software. It does not constitute a sale of intellectual property. All rights not
+expressly granted herein are strictly reserved by The Licensor.\par
+
+\pard\sb120\sa60\ql{\b\fs24 ARTICLE 2. CONSUMER END-USER TIER (B2C / VST3)\par}
+\pard\sb60\sa60\ql\fs20
+{\b 2.1 Machine-Bound Licensing:} For consumer applications, The Licensor grants a
+perpetual, non-exclusive license restricted to {\b one (1) physical machine per license}.\par
+{\b 2.2 Hardware-Tethered Transferability:} The License is irrevocably tethered to the
+physical hardware (Machine) on which it is activated. The Licensee is legally permitted to
+transfer or resell the License {\i only} if the License is sold concurrently with the
+underlying physical Machine. Standalone resale of the digital License is strictly
+prohibited.\par
+{\b 2.3 DRM and Revocation Rights:} The Software currently utilizes offline Ed25519
+cryptographic signatures. The Licensor explicitly reserves the unilateral right to
+implement mandatory online heartbeat validation (Digital Rights Management) in any future
+updates. The Licensor reserves the right to remotely revoke access immediately and without
+refund if any tampering, hex-editing, or circumvention of the Ed25519 DRM is detected.\par
+
+\pard\sb120\sa60\ql{\b\fs24 ARTICLE 3. ENTERPRISE INTEGRATION TIER (B2B / SDK)\par}
+\pard\sb60\sa60\ql\fs20
+{\b 3.1 Custom Modalities:} The distribution of raw C11 source code versus pre-compiled
+static libraries, as well as the financial structures (flat-fee buyout, royalties, or
+subscriptions), shall be determined via separate, bespoke Commercial Addendums attached
+to this Agreement. The Licensor reserves the right to alter commercial modalities at his
+sole discretion prior to contract execution.\par
+{\b 3.2 Derivative Works:} B2B integration is strictly preferred via provided Application
+Programming Interfaces (APIs). The creation of derivative works, forks, or modifications
+to the core C11 engine is prohibited unless explicitly authorized in writing by The
+Licensor on a case-by-case basis.\par
+{\b 3.3 Audit Rights:} The Licensor reserves the right to audit the sales records of B2B
+partners to verify hardware integration counts. Such audits will only be executed upon
+legitimate suspicion of underreporting and shall be formally executed via a sworn French
+bailiff ({\i Huissier de Justice}).\par
+
+\pard\sb120\sa60\ql{\b\fs24 ARTICLE 4. MILITARY, DEFENSE, AND MISSION-CRITICAL TIER\par}
+\pard\sb60\sa60\ql\fs20
+{\b 4.1 Classified & Air-Gapped Environments:} The Licensor is prepared to grant
+perpetual, offline, un-auditable licenses for state or defense contractors operating in
+classified environments, subject to strictly undisclosed and restricted auxiliary
+conditions agreed upon in writing.\par
+{\b 4.2 Absolute Hold Harmless & Life-Support Waiver:} While The Software guarantees
+deterministic hard real-time execution (< 1.3ms block latency), it is provided "AS IS"
+for defense applications. The Licensee unconditionally waives all claims and holds The
+Licensor entirely harmless against any damages, failures, or loss of life resulting from
+the use of The Software in mission-critical, aerospace, or life-support systems.\par
+{\b 4.3 IP Indemnification:} The Licensor agrees to indemnify the Defense/B2B Licensee
+{\i solely} against third-party claims of Intellectual Property infringement regarding the
+core C11 code. The Licensor provides no indemnification against operational, tactical, or
+secondary liabilities.\par
+
+\pard\sb120\sa60\ql{\b\fs24 ARTICLE 5. EXPORT CONTROLS AND CRYPTOGRAPHY\par}
+\pard\sb60\sa60\ql\fs20
+{\b 5.1 Unannounced Export Restrictions:} While The Software may currently be free of
+international export restrictions, The Licensor explicitly reserves the absolute right to
+implement restricted cryptographic telemetry or defense-specific implementations in future
+builds.\par
+{\b 5.2 Compliance:} The Licensor reserves the right to subject The Software to ITAR
+(USA), the Wassenaar Arrangement (EU), or French national security export controls
+({\i Controle des exportations de biens a double usage}) at any time, without prior
+advertisement or notice to existing partners. Licensees must comply with all resulting
+international laws.\par
+
+\pard\sb120\sa60\ql{\b\fs24 ARTICLE 6. TERMINATION AND ZERO-TOLERANCE TRIGGERS\par}
+\pard\sb60\sa60\ql\fs20
+This License shall terminate immediately, automatically, and non-negotiably \u8212? without
+refund or judicial notice \u8212? upon the occurrence of any of the following triggers:\par
+1. {\b Reverse Engineering:} Any attempt to reverse engineer, decompile, decrypt,
+   disassemble, or extract the Kahn AST compiler or the 32-byte node architecture.\par
+2. {\b Counterfeiting:} Any attempt to counterfeit, illegally reproduce, or bypass the
+   licensing mechanisms of The Software.\par
+3. {\b Human Rights Violations:} The use of The Software by any entity, corporation, or
+   state actor currently condemned by the International Criminal Court (ICC) for War
+   Crimes, Crimes Against Humanity, or severe Human Rights Violations.\par
+Upon termination, the Licensee must immediately destroy all copies of The Software and
+associated MIL-STD-498 documentation.\par
+
+\pard\sb120\sa60\ql{\b\fs24 ARTICLE 7. GOVERNING LAW AND WORLDWIDE ENFORCEMENT\par}
+\pard\sb60\sa60\ql\fs20
+{\b 7.1 Governing Law:} This Agreement shall be governed by, construed, and enforced in
+accordance with the laws of {\b France}, without regard to its conflict of law principles.\par
+{\b 7.2 Worldwide Enforcement & Jurisdiction:} While the governing law is French, the
+application of this Agreement is worldwide. The Licensor reserves the absolute freedom to
+utilize any legal representative, undisclosed auxiliary protections, and international
+treaties (e.g., the Berne Convention) to protect this IP globally.\par
+{\b 7.3 Unlawful Users:} Unlawful users will be prosecuted to the maximum extent of French
+Civil and Penal Code, as well as applicable international law.\par
+
+\pard\sb120\sa60\qc\fs18\cf2
+\u169? 2026 M. Fran\u231?ois-Xavier Briollais. All rights reserved.\par
+}
