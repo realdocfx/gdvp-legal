@@ -1,0 +1,6 @@
+# Force a track — no untriaged blank issues (GOVERNANCE.md §1).
+blank_issues_enabled: false
+contact_links:
+  - name: GDVP Governance Protocol
+    url: https://github.com/realdocfx/general_digital_voicing_program/blob/main/GOVERNANCE.md
+    about: "How changes are specified, branched, validated and merged."

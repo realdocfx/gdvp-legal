@@ -1,0 +1,83 @@
+name: governance
+
+# Mechanical enforcement of the GitFlow protocol (GOVERNANCE.md §5, items 1–3):
+# every PR must use a conventional branch name, link a closing issue, and carry
+# Conventional Commits. Make this a REQUIRED check in branch protection on main.
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  protocol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Branch name is conventional (§4)
+        env:
+          BR: ${{ github.head_ref }}
+        run: |
+          echo "branch: $BR"
+          if ! printf '%s' "$BR" | grep -Eq '^(feat|fix|refactor|perf|test|docs|chore|ci|build|revert)/[a-z0-9._-]+(/[a-z0-9._-]+)?$'; then
+            echo "::error::Branch '$BR' is not <type>/<scope>/<description> (GOVERNANCE.md §4)."
+            exit 1
+          fi
+
+      - name: PR closes an issue (§5.1)
+        run: |
+          body="$(jq -r '.pull_request.body // ""' "$GITHUB_EVENT_PATH")"
+          if ! printf '%s' "$body" | grep -Eiq '(clos(e|es|ed)|fix(e|es|ed)?|resolv(e|es|ed)) #[0-9]+'; then
+            echo "::error::PR body must link a closing issue, e.g. 'Closes #123' (GOVERNANCE.md §5.1)."
+            exit 1
+          fi
+
+      # Phase 0 enforcer: anti-no-op. A PR whose normalised diff is empty
+      # under a fix/refactor message is a phantom commit — a claim with no
+      # change. Three such commits shipped in the last round (§05).
+      - name: PR diff is not empty after normalisation (§05 anti-no-op)
+        run: |
+          base="origin/${{ github.base_ref }}"
+          # Count non-whitespace diff lines, excluding docs and CI YAML.
+          # A fix/refactor that only changes .md/.yml is legitimate (docs, CI).
+          diff_lines=$(git diff --ignore-all-space --ignore-blank-lines \
+            "$base"...HEAD -- \
+            ':(exclude)*.md' ':(exclude)*.yml' ':(exclude)*.yaml' \
+            ':(exclude).github/*' ':(exclude)docs/*' | wc -l)
+          if [ "$diff_lines" -eq 0 ]; then
+            # Does any commit subject claim a CODE fix/refactor (scope not
+            # ci/docs/chore)? POSIX ERE has no negative lookahead, so express
+            # "not those scopes" as a two-stage filter, and match the literal
+            # '(' as a character class [(] — a bare \( is parsed inconsistently
+            # across grep builds. (The original used grep -E with a PCRE
+            # lookahead + \(, which errors out on GNU grep and — swallowed by
+            # `|| true` — made this very anti-no-op check a no-op.)
+            has_code_fix=$(git log --no-merges --format=%s "$base"..HEAD \
+              | grep -E '^(fix|refactor)[(]' \
+              | grep -Eiv '^(fix|refactor)[(](ci|docs|chore)' \
+              | wc -l)
+            if [ "$has_code_fix" -gt 0 ]; then
+              echo "::error::PR claims a code fix/refactor but the normalised diff (excluding docs/CI) is empty."
+              exit 1
+            fi
+          fi
+
+      - name: Commits are Conventional Commits (§5.3)
+        run: |
+          base="origin/${{ github.base_ref }}"
+          bad=0
+          while IFS= read -r subj; do
+            [ -z "$subj" ] && continue
+            case "$subj" in
+              Merge\ *|Revert\ *) continue ;;  # merge/revert commits are exempt
+            esac
+            if ! printf '%s' "$subj" | grep -Eq '^(feat|fix|refactor|perf|test|docs|chore|ci|build|revert)(\([a-z0-9._/-]+\))?!?: .+'; then
+              echo "::error::Non-conventional commit subject: '$subj'"
+              bad=1
+            fi
+          done < <(git log --no-merges --format=%s "$base"..HEAD)
+          exit $bad

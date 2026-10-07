@@ -1,0 +1,72 @@
+name: "Implementation (feature / fix / refactor / infra)"
+description: "AIS-gated change. Spec BEFORE code (GOVERNANCE.md)."
+title: "[impl] <concise title>"
+labels: ["implementation", "ais:draft"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **No code without this ticket, and no code without an approved AIS.**
+        Fill the AIS below, get it approved (`ais:approved`), then implement on the
+        declared branch and open a PR that `Closes` this issue.
+  - type: input
+    id: branch
+    attributes:
+      label: Branch (conventional — GOVERNANCE.md §4)
+      description: "<type>/<scope>/<description>"
+      placeholder: "feat/observability/phase2-web"
+    validations:
+      required: true
+  - type: textarea
+    id: thesis
+    attributes:
+      label: 1. Architectural Thesis & Constraints
+      description: "Goal in one paragraph + the hard limits (compute, memory, determinism, safety). Be quantitative."
+    validations:
+      required: true
+  - type: dropdown
+    id: tdd
+    attributes:
+      label: 2. TDD constraint (set at design time)
+      options: ["required", "optional"]
+    validations:
+      required: true
+  - type: input
+    id: ci_gates
+    attributes:
+      label: Per-ticket CI gates that must pass
+      description: "Comma-separated: the checks this change must be green on."
+      placeholder: "engine-ci, timing, tsan, docs-lint"
+    validations:
+      required: true
+  - type: textarea
+    id: implementation
+    attributes:
+      label: 3. Implementation plan
+      description: "Files/interfaces/sequence — small reviewable steps."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 4. Acceptance criteria (closes this issue when green)
+      value: |
+        - [ ]
+        - [ ] CI green incl. the per-ticket gates above
+    validations:
+      required: true
+  - type: textarea
+    id: doc_gate
+    attributes:
+      label: 5. Documentation requirement (the doc gate — GOVERNANCE.md §6)
+      description: "Which manual page / API doc / runbook must be updated for this to count as done."
+      placeholder: "manual/control/midi.md — document the new CC mapping"
+    validations:
+      required: true
+  - type: checkboxes
+    id: ack
+    attributes:
+      label: Protocol acknowledgement
+      options:
+        - label: "I will not begin implementation until this AIS is labelled `ais:approved`."
+          required: true
